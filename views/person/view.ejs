@@ -1,0 +1,18 @@
+<table class="table">
+
+    <tr>
+        <td><%= person.name %></td>
+        <td><%= person.name %></td>
+    </tr>
+
+</table>
+
+<form action="/person/delete/<%= person.id %>" method="post">
+    <button type="submit" class="btn btn-primary" color=red>delete</button>
+</form>
+
+<br>
+
+<form action="/person/update/1" method="post">
+    <button type="submit" class="btn btn-primary" color=red>update</button>
+</form>
