@@ -37,6 +37,8 @@ module.exports.routes = {
   * not match any of those, it is matched against static assets.             *
   *                                                                          *
   ***************************************************************************/
+
+  'GET /person/create' : 'PersonController.create'
  'GET /person/view/:id': 'PersonController.view',
 
  'POST /person/delete/:id': 'PersonController.delete',
