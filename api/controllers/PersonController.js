@@ -123,5 +123,18 @@ paginate: async function (req, res) {
     return res.view('person/paginate', { persons: models, count: numOfPage });
 },
 
+
+populate: async function (req, res) {
+
+    var model = await Person.findOne(req.params.id).populate("worksFor");
+
+    if (!model) return res.notFound();
+
+    return res.json(model);
+
+},
+
+
+
 };
 
