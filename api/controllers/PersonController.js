@@ -92,34 +92,26 @@ module.exports = {
 // search function
 search: async function (req, res) {
 
-    const qName = req.query.name || "";
-    const qAge = parseInt(req.query.age);
+    const qName = req.body.name || "";
+    const qAge = req.body.age || "";
 
-    if (isNaN(qAge)) {
+    var models = await Person.find({
 
-        var models = await Person.find({
-            where: { name: { contains: qName } },
-            sort: 'name'
-        });
+        where: { name: qName, age: qAge},
+        sort: 'name'
+    });
+   
 
-    } else {
-
-        var models = await Person.find({
-            where: { name: { contains: qName }, age: qAge },
-            sort: 'name'
-        });
-
-    }
-
-    return res.view('person/index', { persons: models });
+    return res.view('person/paginate', { persons: models });
 },
 
 // action - paginate
 paginate: async function (req, res) {
 
     const qPage = Math.max(req.query.page - 1, 0) || 0;
-
     const numOfItemsPerPage = 2;
+
+
 
     var models = await Person.find({
         limit: numOfItemsPerPage, 

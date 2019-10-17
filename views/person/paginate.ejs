@@ -5,6 +5,26 @@
     <% }); %>
 </table>
 
+
+<form action="/person/search" method="POST">
+<div class="row">
+    <div class="col-12 col-sm-4 col-lg-4 col-xl-3">
+        <label>name</label></div>
+    <div class="col-12 col-sm-4 col-lg-4 col-xl-9">
+        <input type="string" id="name" class="form-control" name="person[name]">
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-4 col-lg-4 col-xl-3">
+        <label>age</label></div>
+    <div class="col-12 col-sm-4 col-lg-4 col-xl-9">
+        <input type="number" id="age"  class="form-control" name="person[age]">
+    </div>
+</div>
+<button type="submit" class="btn btn-primary">Search</button>  
+</form>
+
+
 <% const current = parseInt(req.query.page) || 1; %>
 
 <nav aria-label="Page navigation example">

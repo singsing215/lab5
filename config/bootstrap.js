@@ -33,10 +33,32 @@ module.exports.bootstrap = async function() {
 }
 
 await Person.createEach([
+    { name: "Martin Choy", age: 23, no:1 },
+    { name: "Kenny Cheng", age: 22, no:2 }
+    // etc.
+]);
+
+if (await Person.count() == 0) {
+
+  await Person.createEach([
     { name: "Martin Choy", age: 23 },
     { name: "Kenny Cheng", age: 22 }
     // etc.
-]);
+  ]);
+
+}
+
+if (await User.count() == 0) {
+
+  await User.createEach([
+    { username: "admin", password: "123456" },
+    { username: "boss", password: "123456" }
+    // etc.
+  ]);
+
+}
+
+return;
 
 
 };
