@@ -21,7 +21,7 @@
             credentials: 'same-origin',
             body: new FormData(oFormElement),
         });
-
+ 
         if (response.ok) {
             var data = await response.json();   // for res.ok() or res.json()
             alert(data);
