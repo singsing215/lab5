@@ -14,13 +14,13 @@ module.exports.bootstrap = async function () {
 
   sails.bcrypt = require('bcryptjs');
   const saltRounds = 10;
-  const hash = await sails.bcrypt.hash('123456', saltRounds);
+  // const hash = await sails.bcrypt.hash('123456', saltRounds);
 
-  await User.createEach([
-    { username: "admin", password: hash },
-    { username: "boss", password: hash }
-    // etc.
-  ]);
+  // await User.createEach([
+  //   { username: "admin", password: hash },
+  //   { username: "boss", password: hash }
+  //   // etc.
+  // ]);
 
 
 
