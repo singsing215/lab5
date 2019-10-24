@@ -22,11 +22,11 @@
     async function deletePerson(id) {
 
         var r = confirm("Confirm Delete?");
-       
+
         if (r) {
 
-            var response = await fetch("/person/delete/" + id, {
-                method: "POST",
+            var response = await fetch("/person/" + id, {
+                method: "DELETE",
                 credentials: 'same-origin',
             });
 
@@ -34,13 +34,13 @@
             alert(html);
 
             if (response.ok) {
-    var data = await response.json();
-    alert(data.message);
-    window.location = data.url;
-    
-} else {
-    alert(response.status + ": " + response.statusText);
-}
+                var data = await response.json();
+                alert(data.message);
+                window.location = data.url;
+
+            } else {
+                alert(response.status + ": " + response.statusText);
+            }
 
         } else {
             alert("cancelled");

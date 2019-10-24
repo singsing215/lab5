@@ -59,4 +59,7 @@ module.exports.routes = {
 'POST /user/:id/supervises/add/:fk': 'UserController.add',
 'POST /user/:id/supervises/remove/:fk': 'UserController.remove',
 
+// 'POST /person/delete/:id': 'PersonController.delete',
+'DELETE /person/:id': 'PersonController.delete',
+
 };
