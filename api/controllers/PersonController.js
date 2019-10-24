@@ -51,13 +51,13 @@ module.exports = {
     // action - delete 
     delete: async function (req, res) {
 
-        if (req.method == "GET") return res.forbidden();
+        if (req.wantsJSON){
+            return res.json({message: "Person deleted.", url: '/'});    // for ajax request
+        } else {
+            return res.redirect('/');           // for normal request
+        }
 
-        var models = await Person.destroy(req.params.id).fetch();
 
-        if (models.length == 0) return res.notFound();
-
-        return res.ok("Person Deleted.");
 
     },
 

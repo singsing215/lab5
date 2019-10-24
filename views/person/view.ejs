@@ -8,7 +8,7 @@
 </table>
 
 <form action="/person/delete/<%= person.id %>" method="post">
-    <button type="submit" class="btn btn-primary" color=red>delete</button>
+    <button type="button" class="btn btn-danger" onclick="deletePerson('<%= person.id %>')">Delete</button>
 </form>
 
 <br>
@@ -16,3 +16,36 @@
 <form action="/person/update/1" method="post">
     <button type="submit" class="btn btn-primary" color=red>update</button>
 </form>
+
+<script>
+
+    async function deletePerson(id) {
+
+        var r = confirm("Confirm Delete?");
+       
+        if (r) {
+
+            var response = await fetch("/person/delete/" + id, {
+                method: "POST",
+                credentials: 'same-origin',
+            });
+
+            var html = await response.text();
+            alert(html);
+
+            if (response.ok) {
+    var data = await response.json();
+    alert(data.message);
+    window.location = data.url;
+    
+} else {
+    alert(response.status + ": " + response.statusText);
+}
+
+        } else {
+            alert("cancelled");
+        }
+
+    };
+
+</script>
