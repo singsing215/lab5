@@ -10,17 +10,17 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function() {
+module.exports.bootstrap = async function () {
 
   sails.bcrypt = require('bcryptjs');
-const saltRounds = 10;
-const hash = await sails.bcrypt.hash('123456', saltRounds);
+  const saltRounds = 10;
+  const hash = await sails.bcrypt.hash('123456', saltRounds);
 
-await User.createEach([
+  await User.createEach([
     { username: "admin", password: hash },
     { username: "boss", password: hash }
     // etc.
-]);
+  ]);
 
 
 
@@ -43,41 +43,42 @@ await User.createEach([
 
   if (await Person.count() > 0) {
     return generateUsers();
-}
-
-await Person.createEach([
-  { name: "Martin Choy", age: 23 },
-  { name: "Kenny Cheng", age: 22 },
-  // etc.
-]);
-
-return generateUsers();
-
-
-
-async function generateUsers() {
-
-  if (await User.count() > 0) {
-    return;
   }
-  
-  const hash = await sails.bcrypt.hash('123456', saltRounds);
-  
-  await User.createEach([
-    { username: "admin", password: hash },
-    { username: "boss", password: hash },
+
+  await Person.createEach([
+    { name: "Martin Choy", age: 23 },
+    { name: "Kenny Cheng", age: 22 },
     // etc.
   ]);
-  
-  const martin = await Person.findOne({ name: "Martin Choy" });
-  const kenny = await Person.findOne({ name: "Kenny Cheng" });
-  const admin = await User.findOne({ username: "admin" });
-  const boss = await User.findOne({ username: "boss" });
-  
-  await User.addToCollection(admin.id, 'supervises').members(kenny.id);
-  await User.addToCollection(boss.id, 'supervises').members([martin.id, kenny.id]);
 
-}
+  return generateUsers();
+
+
+
+  async function generateUsers() {
+
+    if (await User.count() > 0) {
+      return;
+    }
+
+    const hash = await sails.bcrypt.hash('123456', saltRounds);
+
+    await User.createEach([
+      { username: "admin", password: hash, role:"admin" },
+      { username: "boss", password: hash },
+   
+      // etc.
+    ]);
+
+    const martin = await Person.findOne({ name: "Martin Choy" });
+    const kenny = await Person.findOne({ name: "Kenny Cheng" });
+    const admin = await User.findOne({ username: "admin" });
+    const boss = await User.findOne({ username: "boss" });
+
+    await User.addToCollection(admin.id, 'supervises').members(kenny.id);
+    await User.addToCollection(boss.id, 'supervises').members([martin.id, kenny.id]);
+
+  }
 
 
 
